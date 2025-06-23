@@ -1,0 +1,178 @@
+{
+    "info": {
+        "name": "Calendar Scheduler API",
+        "_postman_id": "1a2b3c4d-5e6f-7890-1234-56789abcdef0",
+        "description": "Postman collection for Calendar Scheduler API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+        "name": "Register",
+        "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"1234567\",\n  \"timezone\": \"Asia/Kolkata\"\n}"
+            },
+            "url": {
+            "raw": "http://localhost:3000/api/v1/user/register",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "user", "register"]
+            }
+        }
+        },
+        {
+        "name": "Login",
+        "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"1234567\"\n}"
+            },
+            "url": {
+            "raw": "http://localhost:3000/api/v1/user/login",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "user", "login"]
+            }
+        }
+        },
+        {
+        "name": "Create Calendar",
+        "request": {
+            "method": "POST",
+            "header": [
+            { "key": "Content-Type", "value": "application/json" },
+            { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"Work\"\n}"
+            },
+            "url": {
+            "raw": "http://localhost:3000/api/v1/calendar",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "calendar"]
+            }
+        }
+        },
+        {
+        "name": "Get Calendars",
+        "request": {
+            "method": "GET",
+            "header": [
+            { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+            "raw": "http://localhost:3000/api/v1/calendar",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "calendar"]
+            }
+        }
+        },
+        {
+        "name": "Delete Calendar",
+        "request": {
+            "method": "DELETE",
+            "header": [
+            { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+            "raw": "http://localhost:3000/api/v1/calendar/{{calendarId}}",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "calendar", "{{calendarId}}"]
+            }
+        }
+        },
+        {
+        "name": "Create Event",
+        "request": {
+            "method": "POST",
+            "header": [
+            { "key": "Content-Type", "value": "application/json" },
+            { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+            "mode": "raw",
+            "raw": "{\n  \"title\": \"Weekly Sync\",\n  \"description\": \"Team status meeting\",\n  \"start\": \"2025-06-24T09:00:00.000Z\",\n  \"end\": \"2025-06-24T10:00:00.000Z\",\n  \"calendarId\": \"{{calendarId}}\",\n  \"reminders\": [10, 30],\n  \"recurrence\": \"weekly\",\n  \"timezone\": \"Asia/Kolkata\"\n}"
+            },
+            "url": {
+            "raw": "http://localhost:3000/api/v1/event",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "event"]
+            }
+        }
+        },
+        {
+        "name": "Get Events",
+        "request": {
+            "method": "GET",
+            "header": [
+            { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+            "raw": "http://localhost:3000/api/v1/event",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "event"]
+            }
+        }
+        },
+        {
+        "name": "Update Event",
+        "request": {
+            "method": "PUT",
+            "header": [
+            { "key": "Content-Type", "value": "application/json" },
+            { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+            "mode": "raw",
+            "raw": "{\n  \"title\": \"Updated Title\",\n  \"timezone\": \"UTC\"\n}"
+            },
+            "url": {
+            "raw": "http://localhost:3000/api/v1/event/{{eventId}}",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "event", "{{eventId}}"]
+            }
+        }
+        },
+        {
+        "name": "Delete Event",
+        "request": {
+            "method": "DELETE",
+            "header": [
+            { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+            "raw": "http://localhost:3000/api/v1/event/{{eventId}}",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "event", "{{eventId}}"]
+            }
+        }
+        }
+    ],
+    "variable": [
+        { "key": "token", "value": "" },
+        { "key": "calendarId", "value": "" },
+        { "key": "eventId", "value": "" }
+    ]
+}

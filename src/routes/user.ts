@@ -28,7 +28,7 @@ const router = Router();
  *             properties:
  *               email:
  *                 type: string
- *                 example: user@example.com
+ *                 example: user@example1.com
  *               password:
  *                 type: string
  *                 example: password123
@@ -63,7 +63,7 @@ router.post("/register", register as unknown as RequestHandler);
  *             properties:
  *               email:
  *                 type: string
- *                 example: user@example.com
+ *                 example: user@example1.com
  *               password:
  *                 type: string
  *                 example: password123

@@ -2,7 +2,9 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { UserModel } from "../models/User";
+import { registerSchema, loginSchema } from "../validations/user.schema";
 import dotenv from 'dotenv';
+import { ZodError } from "zod";
 
 
 
@@ -11,7 +13,12 @@ const JWT_SECRET = process.env.JWT_SECRET!;
 
 export const register = async (req: Request, res: Response) => {
     try {
-        const { email, password, timezone } = req.body;
+        const validation = registerSchema.safeParse(req.body);
+        if (!validation.success) {
+            return res.status(400).json({ message: "Invalid request data", errors: validation.error.flatten().fieldErrors });
+        }
+
+        const { email, password, timezone } = validation.data;
 
         const existingUser = await UserModel.findOne({ email });
         if (existingUser) {
@@ -43,7 +50,12 @@ export const register = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
     try {
-        const { email, password } = req.body;
+        const validation = loginSchema.safeParse(req.body);
+        if (!validation.success) {
+            return res.status(400).json({ message: "Invalid request data", errors: validation.error.flatten().fieldErrors });
+        }
+        
+        const { email, password } = validation.data;
 
         const user = await UserModel.findOne({ email });
         if (!user || !user.password) {

@@ -12,10 +12,19 @@ declare global {
 
 
 const jwt_secret = process.env.JWT_SECRET!;
-
+if (!jwt_secret) {
+    throw new Error("JWT_SECRET is not defined in environment variables.");
+}
 
 export const authenticate = (req:Request,res:Response,next:NextFunction): void => {
-    const token = req.cookies?.token || req.headers.authorization?.split(" ")[1];
+    const cookieToken = req.cookies?.token;
+
+    const authHeader = req.headers.authorization;
+    const bearerToken = authHeader && authHeader.startsWith("Bearer ")
+        ? authHeader.split(" ")[1]
+        : null;
+
+    const token = cookieToken || bearerToken;
 
     if (!token) {
         res.status(401).json({ message: "Unauthorized" });

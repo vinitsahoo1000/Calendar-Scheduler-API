@@ -5,8 +5,12 @@ import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './docs/swagger';
 import mainRouter from "./routes";
 import { connectDB } from "./db";
+import dotenv from "dotenv";
 
-const app = express();
+
+dotenv.config();
+
+export const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
